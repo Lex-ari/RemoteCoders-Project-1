@@ -6,7 +6,8 @@ Professor Qichao Dong
 CS2400
 */
 
-public class LinkedBag implements BagInterface{
+public class LinkedBag<T> implements BagInterface<T>{
+
 
     @Override
     public int getCurrentSize() {
@@ -19,17 +20,17 @@ public class LinkedBag implements BagInterface{
     }
 
     @Override
-    public boolean add(Object newEntry) {
+    public boolean add(T newEntry) {
         return false;
     }
 
     @Override
-    public Object remove() {
+    public T remove() {
         return null;
     }
 
     @Override
-    public boolean remove(Object anEntry) {
+    public boolean remove(T anEntry) {
         return false;
     }
 
@@ -39,32 +40,32 @@ public class LinkedBag implements BagInterface{
     }
 
     @Override
-    public int getFrequencyOf(Object anEntry) {
+    public int getFrequencyOf(T anEntry) {
         return 0;
     }
 
     @Override
-    public boolean contains(Object anEntry) {
+    public boolean contains(T anEntry) {
         return false;
     }
 
     @Override
-    public Object[] toArray() {
-        return new Object[0];
-    }
-
-    @Override
-    public BagInterface union(Object aBag) {
+    public T[] toArray() {
         return null;
     }
 
     @Override
-    public BagInterface intersection(Object aBag) {
+    public T union(T aBag) {
         return null;
     }
 
     @Override
-    public BagInterface difference(Object aBag) {
+    public T intersection(T aBag) {
+        return null;
+    }
+
+    @Override
+    public T difference(T aBag) {
         return null;
     }
 }
