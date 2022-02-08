@@ -1,0 +1,6 @@
+bag1: a a b b b c d e
+bag2: a b b e e
+bag1.union(bag2) = bag2.union(bag1): a a a b b b b b c d e e e
+bag1.intersection(bag2) = bag2.intersection(bag1) = a b b e
+bag1.difference(bag2) = a b c d
+bag2.difference(bag1) = e
