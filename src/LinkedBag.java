@@ -55,17 +55,17 @@ public class LinkedBag<T> implements BagInterface<T>{
     }
 
     @Override
-    public T union(T aBag) {
+    public BagInterface<T> union(T aBag) {
         return null;
     }
 
     @Override
-    public T intersection(T aBag) {
+    public BagInterface<T> intersection(T aBag) {
         return null;
     }
 
     @Override
-    public T difference(T aBag) {
+    public BagInterface<T> difference(T aBag) {
         return null;
     }
 }

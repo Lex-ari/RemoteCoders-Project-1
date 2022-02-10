@@ -56,18 +56,18 @@ public interface BagInterface<T> {
      * @param aBag  An Existing Bag
      * @return  New bag of the union of the bag receiving the call to the method and the bag that is the method's one argument.
      */
-    public T union(T aBag);
+    public BagInterface<T> union(T aBag);
 
     /** The intersection of two collections is a new collection of the entries that occur in both collections. That is, it contains the overlapping entries.
      * @param aBag  An Existing Bag
      * @return  New bag the intersection of the bag receiving the call to the method and the bag that is the method’s one argument.
      */
-    public T intersection(T aBag);
+    public BagInterface<T> intersection(T aBag);
 
     /** The difference of two collections is a new collection of the entries that would be left in one collection after removing those that also occur in the second.
      * @param aBag  An Existing Bag
      * @return  New bag the difference of the bag receiving the call to the method and the bag that is the method’s one argument. Include sufficient comments to fully specify the method.
      */
-    public T difference(T aBag);
+    public BagInterface<T> difference(T aBag);
 
 }
