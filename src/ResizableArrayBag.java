@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 /**
 Remote Coders
@@ -8,7 +9,7 @@ CS2400
 
 public class ResizableArrayBag<T> implements BagInterface<T>{
 
-    private final T[] bag;
+    private T[] bag; //@TODO: Not sure if this should be final or not. If final, doubleCapacity() breaks. - Alex
     private static final int DEFAULT_CAPACITY = 25;
     private static final int MAX_CAPACITY = 10000;
     private int numberOfEntries;
@@ -57,26 +58,70 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
     @Override
     public boolean add(T newEntry) {
         checkIntegrity();
-        boolean result = true;
         if (isFull()) {
-            result = false;
-        } else {
-            //Assertion: result is true
-            bag[numberOfEntries] = newEntry;
-            numberOfEntries++;
+            doubleCapacity();
         }
-        return result; //returns true if successful
+
+        bag[numberOfEntries] = newEntry;
+        numberOfEntries++;
+
+        return true; //returns very successful. Inner methods would throw exception if not.
     }
 
+    private void checkCapacity(int capacity){ // Very simple check to not go over max capacity
+        if (capacity > MAX_CAPACITY){
+            throw new IllegalStateException("Attempted to create a bag whose capcaity exceeds allowed maximum of " + MAX_CAPACITY);
+        }
+    }
+
+    private void doubleCapacity(){
+        int newLength = 2 * bag.length;
+        checkCapacity(newLength);
+        bag = Arrays.copyOf(bag, newLength);
+    }
+
+    /**
+     *
+     * @return Removed entry, or null if unsuccessful.
+     */
     @Override
     public T remove() {
-        return null; // STUB
+        checkIntegrity();
+        T result = removeEntry(numberOfEntries - 1);
+        return result;
     }
 
+
+    /**
+     * @param anEntry  The entry to be removed.
+     * @return True if removal was successful, false if not
+     */
     @Override
     public boolean remove(T anEntry) {
-        return false; // STUB
+        checkIntegrity();
+        int index = getIndexOf(anEntry);
+        T result = removeEntry(index);
+        return anEntry.equals(result);
     }
+
+
+    /**
+     Removes and returns the entry at given index within array bag.
+     No Entry exists = returns null]
+     Preconditions: 0 <= givenIndex < numberOfEntries; checkIntegrity has been called.
+     */
+    private T removeEntry(int givenIndex){
+        T result = null;
+        if (!isEmpty() && (givenIndex >= 0)){
+            result = bag[givenIndex];
+            bag[givenIndex] = bag[numberOfEntries - 1]; // Replace entry with last entry. Saves some time rather than shifting the rest.
+            bag[numberOfEntries - 1] = null; // Removes last entry
+            numberOfEntries--;
+        }
+
+        return result;
+    }
+
 
     @Override
     public void clear() {
