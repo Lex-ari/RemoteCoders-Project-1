@@ -35,6 +35,25 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
         }
     }
 
+    /**
+     * This is a copy constructor - Alex
+     * @param bagToCopy
+     */
+    public ResizableArrayBag(BagInterface<T> bagToCopy){
+        //Assertion: bagToCopy is less than MAX_CAPACITY.
+
+        @SuppressWarnings("unchecked")
+        T[] tempBag = (T[])new Object[bagToCopy.getCurrentSize()];
+        T[] bagToCopyContents = bagToCopy.toArray();
+        for (int index = 0; index < bagToCopy.getCurrentSize(); index++){
+            //Assertion: bagToCopyContents and tempBag is the same length.
+            tempBag[index] = bagToCopyContents[index];
+        }
+        numberOfEntries = bagToCopy.getCurrentSize();
+        bag = tempBag;
+        integrityOK = true;
+    }
+
     private void checkIntegrity(){
         if (!integrityOK){
             throw new SecurityException("ArrayBag object is corrupt.");
@@ -184,9 +203,21 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
         return null; // STUB
     }
 
+    /**
+     *
+     * @param aBag  An Existing Bag
+     * @return A new bag interface of the difference of the bag receiving the call to the method and the bag that is the method's argument.
+     */
     @Override
     public BagInterface<T> difference(BagInterface<T> aBag) {
-
-        return new ResizableArrayBag<T>(); // STUB
+        ResizableArrayBag<T> leftOverBag = new ResizableArrayBag(this);
+        T[] differenceBag = aBag.toArray();
+        for (int index = 0; index < differenceBag.length; index++){
+            leftOverBag.remove(differenceBag[index]);
+        }
+        return leftOverBag;
+        /**
+         * @TODO Idk if I need an integrity check here - Alex
+         */
     }
 }
