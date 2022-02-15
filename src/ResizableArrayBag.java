@@ -175,17 +175,18 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
     }
 
     @Override
-    public BagInterface<T> union(T aBag) {
+    public BagInterface<T> union(BagInterface<T> aBag) {
         return null; // STUB
     }
 
     @Override
-    public BagInterface<T> intersection(T aBag) {
+    public BagInterface<T> intersection(BagInterface<T> aBag) {
         return null; // STUB
     }
 
     @Override
-    public BagInterface<T> difference(T aBag) {
-        return null; // STUB
+    public BagInterface<T> difference(BagInterface<T> aBag) {
+
+        return new ResizableArrayBag<T>(); // STUB
     }
 }
