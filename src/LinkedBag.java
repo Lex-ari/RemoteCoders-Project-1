@@ -66,6 +66,20 @@ public class LinkedBag<T> implements BagInterface<T>{
 
     @Override
     public BagInterface<T> difference(BagInterface<T> aBag) {
-        return null;
+        /**
+         * Placeholder code until required methods are created.
+         */
+        /*
+        checkIntegrity(); // Idk if this is needed - Alex
+        @SuppressWarnings("unchecked")
+        LinkedBag<T> leftOverBag = new LinkedBag(this); // Copy Constructor NEEDED!
+        T[] differenceBag = aBag.toArray();
+        for (T item : differenceBag) {
+            leftOverBag.remove(item);
+        }
+        leftOverBag.checkIntegrity(); // Idk if this is needed - Alex
+        return leftOverBag;
+         */
+        return null; // STUB
     }
 }
