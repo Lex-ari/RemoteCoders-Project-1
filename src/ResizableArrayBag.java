@@ -9,7 +9,7 @@ CS2400
 
 public class ResizableArrayBag<T> implements BagInterface<T>{
 
-    private T[] bag; //@TODO: Not sure if this should be final or not. If final, doubleCapacity() breaks. - Alex
+    private  T[] bag; //@TODO: Not sure if this should be final or not. If final, doubleCapacity() breaks. - Alex
     private static final int DEFAULT_CAPACITY = 25;
     private static final int MAX_CAPACITY = 10000;
     private int numberOfEntries;
@@ -192,14 +192,32 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
         }
         return result;
     }
+    /*
+    *    @return A new bag of the union of the bag
+     */
 
     @Override
     public BagInterface<T> union(BagInterface<T> aBag) {
-        return null; // STUB
+        checkIntegrity();
+
+        ResizableArrayBag<T> everything = new ResizableArrayBag(this);
+        T[] unionBag = aBag.toArray();
+        for (T item : unionBag) {
+            everything.add(item);
+        }
+        everything.checkIntegrity();
+
+
+
+
+        // STUB
+        return aBag;
     }
 
     @Override
     public BagInterface<T> intersection(BagInterface<T> aBag) {
+
+
         return null; // STUB
     }
 
