@@ -116,7 +116,7 @@ public class LinkedBag<T> implements BagInterface<T>{
         }
         return result;
     }
-    class Node{
+    private class Node{
         private T data;
         private Node next;
 
