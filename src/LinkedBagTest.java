@@ -30,41 +30,61 @@ public class LinkedBagTest{
     private static void testIsEmpty(BagInterface<String> aBag, boolean result){
         System.out.println("Testing isEmpty method...");
         boolean methodCheck = aBag.isEmpty();
-        if(methodCheck == result){
-            System.out.println("Valid method");
+        if(result){
+            System.out.println("Bag is empty");
         }
         else{
-            System.out.println("Invalid method");
+            System.out.println("Bag is not empty");
         }
-    }
-    private static void testFrequency(BagInterface<String> aBag, String[] array){
-        int methodCheck = aBag.getFrequencyOf("B");
-        if(methodCheck == 1){
-            System.out.println("Valid method");
+        if(methodCheck && !result){
+            System.out.println("isEmpty returns true but bag is not empty: ERROR");
         }
-        else{
-            System.out.println("Invalid method");
+        else if(!methodCheck && result){
+            System.out.println("isEmpty returns false but bag is empty: ERROR");
         }
-    }
-    private static void testContains(BagInterface<String> aBag, String[] array){
-        boolean methodCheck = aBag.contains("B");
-        if(methodCheck){
-            System.out.println("Valid method");
+        else if(methodCheck && result){
+            System.out.println("isEmpty returns true: OK");
         }
         else{
-            System.out.println("Invalid method");
+            System.out.println("isEmpty returns false: OK");
         }
     }
-    private static void testRemove(BagInterface<String> aBag, String[] array){
-        System.out.println(aBag);
-        aBag.remove();
-        System.out.println(aBag);
+    private static void testFrequency(BagInterface<String> aBag, String[] content){
+        System.out.println("Testing getFrequencyOf method: ");
+        int result = aBag.getFrequencyOf("B");
+        System.out.println("Frequency of B: " + result);
+    }
+    private static void testContains(BagInterface<String> aBag, String[] content){
+        System.out.println("Testing contains method: ");
+        boolean result = aBag.contains("B");
+        System.out.println("Does the bag contain B: " + result);
+    }
+    private static void testRemove(BagInterface<String> aBag, String[] content){
+        System.out.println("removing from the bag: ");
+        for(int index = 0; index < content.length; index++){
+            System.out.print(content[index] + " ");
+            aBag.remove(content[index]);
+        }
+        System.out.println();
+        displayBag(aBag);
         
     }
-    private static void testAdd(BagInterface<String> aBag, String[] array){
-        System.out.println(aBag);
-        aBag.add("A");
-        System.out.println(aBag);
+    private static void testAdd(BagInterface<String> aBag, String[] content){
+        System.out.println("adding to the bag: ");
+        for(int index = 0; index < content.length; index++){
+            aBag.add(content[index]);
+            System.out.print(content[index] + " ");
+        }
+        System.out.println();
+        displayBag(aBag);
     }
+    private static void displayBag(BagInterface<String> aBag){
+        System.out.println("The bag contains the following string(s):");
+        Object[] bagArray = aBag.toArray();
+        for(int index = 0; index < bagArray.length; index++){
+            System.out.print(bagArray[index] + " ");
+        }
+        System.out.println();
+       }
     
 }
