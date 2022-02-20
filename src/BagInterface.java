@@ -86,6 +86,7 @@ public interface BagInterface<T> {
      * @return New bag of the union of the bag receiving the call to the method and the bag that is the method's one argument.
      */
     public BagInterface<T> union(BagInterface<T> aBag);
+        
 
     /**
      * The intersection of two collections is a new collection of the entries that occur in both collections. That is, it contains the overlapping entries.
