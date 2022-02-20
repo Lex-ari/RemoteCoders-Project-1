@@ -8,58 +8,151 @@ CS2400
 
 public class LinkedBag<T> implements BagInterface<T>{
 
+    private Node firstNode;
+    private int numberOfEntries;
 
+    public LinkedBag(){
+        firstNode = null;
+        numberOfEntries = 0;
+    }
     @Override
     public int getCurrentSize() {
-
-        return 0;
+        return numberOfEntries;
     }
 
     @Override
     public boolean isEmpty() {
-
-        return false;
+        return numberOfEntries == 0;
     }
 
     @Override
     public boolean add(T newEntry) {
+        Node newNode = new Node(newEntry);
+        newNode.next = firstNode;
 
-        return false;
+        firstNode = newNode;
+        numberOfEntries++;
+
+        return true;
     }
 
     @Override
     public T remove() {
-
-        return null;
+        T result = null;
+        if(firstNode != null){
+            result = firstNode.getData();
+            firstNode = firstNode.getNextNode();
+            numberOfEntries--;
+        }
+        return result;
     }
 
     @Override
     public boolean remove(T anEntry) {
+        boolean result = false;
+        Node nodeN = getReferenceTo(anEntry);
 
-        return false;
+        if(nodeN != null){
+            nodeN.setData(firstNode.getData());
+
+            numberOfEntries--;
+
+            result = true;
+        }
+
+        return result;
     }
 
     @Override
     public void clear() {
-
+        while(!isEmpty()){
+            remove();
+        }
     }
 
     @Override
     public int getFrequencyOf(T anEntry) {
+        int frequency = 0;
+        int counter = 0;
+        Node currentNode = firstNode;
 
-        return 0;
+        while((counter < numberOfEntries) && (currentNode != null)){
+            if(anEntry.equals(currentNode.getData())){
+                frequency++;
+            }
+            counter++;
+            currentNode = currentNode.getNextNode();
+        }
+        return frequency;
     }
 
     @Override
     public boolean contains(T anEntry) {
+        boolean found = false;
+        Node currentNode = firstNode;
 
-        return false;
+        while(!found && (currentNode != null)){
+            if(anEntry.equals(currentNode.getData())){
+                found = true;
+            }
+            else{
+                currentNode = currentNode.getNextNode();
+            }
+        }
+        return found;
     }
 
     @Override
     public T[] toArray() {
+        @SuppressWarnings("unchecked");
+        T[] result = (T[])new Object[numberOfEntries];
 
-        return null;
+        int index = 0;
+        Node currentNode = firstNode;
+        while((index < currentNode) && (currentNode != null)){
+            result[index] = currentNode.getData();
+            index++;
+            currentNode = currentNode.getNextNode();
+        }
+        return result;
+    }
+    class Node{
+        private T data;
+        private Node next;
+
+        private Node(T dataPortion){
+            this(dataPortion, null);
+        }
+        private Node(T dataPortion, Node nextNode){
+            data = dataPortion;
+            next = nextNode;
+        }
+        private T getData(){
+            return data;
+        }
+        private void setData(T newData){
+            data = newData;
+        }
+        private Node getNextNode(){
+            return next;
+        }
+        private void setNextNode(Node nextNode){
+            next = nextNode;
+        }
+        private Node getReferenceTo(T anEntry){
+            boolean found = false;
+            Node currentNode = firstNode;
+
+            while(!found && (currentNode != null)){
+                if(anEntry.equals(currentNode.getData())){
+                    found = true;
+                }
+                else{
+                    currentNode = currentNode.getNextNode();
+                }
+            }
+            return currentNode;
+        }
     }
 
     @Override
