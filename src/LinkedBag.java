@@ -111,12 +111,12 @@ public class LinkedBag<T> implements BagInterface<T>{
 
     @Override
     public T[] toArray() {
-        @SuppressWarnings("unchecked");
+        @SuppressWarnings("unchecked")
         T[] result = (T[])new Object[numberOfEntries];
 
         int index = 0;
         Node currentNode = firstNode;
-        while((index < currentNode) && (currentNode != null)){
+        while((index < numberOfEntries) && (currentNode != null)){
             result[index] = currentNode.getData();
             index++;
             currentNode = currentNode.getNextNode();
