@@ -199,7 +199,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
     @Override
     public BagInterface<T> union(BagInterface<T> aBag) {
         checkIntegrity();
-
+        @SuppressWarnings("unchecked")
         ResizableArrayBag<T> everything = new ResizableArrayBag(this);
         T[] unionBag = aBag.toArray();
         for (T item : unionBag) {
@@ -209,9 +209,8 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
 
 
 
-
         // STUB
-        return aBag;
+        return everything;
     }
 
     @Override
@@ -220,6 +219,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
 
         return null; // STUB
     }
+
 
     /**
      *

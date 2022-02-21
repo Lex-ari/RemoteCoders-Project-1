@@ -36,7 +36,6 @@ public class ArrayBagTest{
     }
 
 
-
     private static void testIsFull(BagInterface<String> aBag, boolean correctResult) {
         System.out.println("\nTesting the method isFull with");
         if(correctResult)
@@ -45,19 +44,25 @@ public class ArrayBagTest{
             System.out.println("a bag is not full");
 
         System.out.println("isFUll finds the bag");
-        //if(correctResult && aBag.isFull())
+        if(correctResult && aBag.isFull())
             System.out.println("full: ok");
-        //else if(correctResult)
+        else if(correctResult)
             System.out.println("not full, but it is full: ERROR");
-        //else if(aBag.isFull())
+        else if(aBag.isFull())
             System.out.println("full, but it is not full: ERROR");
-        //else
+        else
             System.out.println("not full: Ok");
-
-
-
-
     }
+
+
+
+
+
+
+
+
+
+
     private static void displayBag(BagInterface<String> aBag) {
         System.out.println("The bag contains the following strings:");
         Object[] bagArray = aBag.toArray();
@@ -68,9 +73,7 @@ public class ArrayBagTest{
         System.out.println();
     }
 
-    public <T> union(T, Bag1){
+    public <T> void union(T[] contentsOfBag1, T[] contentsOfBag2){
 
     }
-
-
 }

@@ -17,7 +17,7 @@ public class LinkedBag<T> implements BagInterface<T>{
     }
 
     public LinkedBag(BagInterface<T> bagToCopy){
-        for (T thing : bagToCopy.toArray()){
+        for(T thing : bagToCopy.toArray()){
             this.add(thing);
         }
     }
@@ -164,15 +164,17 @@ public class LinkedBag<T> implements BagInterface<T>{
 
     @Override
     public BagInterface<T> union(BagInterface<T> aBag) {
+        @SuppressWarnings("unchecked")
+        LinkedBag<T> everything = new LinkedBag(this);
+        T[] unionBag = aBag.toArray();
+        for (T item : unionBag) {
+            everything.add(item);
+        }
+
+        // STUB
+        return everything;
 
 
-
-
-
-
-
-
-        return null; //stub
     }
 
 
