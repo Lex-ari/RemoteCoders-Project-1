@@ -123,6 +123,20 @@ public class LinkedBag<T> implements BagInterface<T>{
         }
         return result;
     }
+    public Node getReferenceTo(T anEntry){
+        boolean found = false;
+        Node currentNode = firstNode;
+
+        while(!found && (currentNode != null)){
+            if(anEntry.equals(currentNode.getData())){
+                found = true;
+            }
+            else{
+                currentNode = currentNode.getNextNode();
+            }
+        }
+        return currentNode;
+    }
     private class Node{
         private T data;
         private Node next;
@@ -145,20 +159,6 @@ public class LinkedBag<T> implements BagInterface<T>{
         }
         private void setNextNode(Node nextNode){
             next = nextNode;
-        }
-        private Node getReferenceTo(T anEntry){
-            boolean found = false;
-            Node currentNode = firstNode;
-
-            while(!found && (currentNode != null)){
-                if(anEntry.equals(currentNode.getData())){
-                    found = true;
-                }
-                else{
-                    currentNode = currentNode.getNextNode();
-                }
-            }
-            return currentNode;
         }
     }
 
