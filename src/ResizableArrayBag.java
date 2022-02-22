@@ -60,7 +60,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
         }
     }
 
-    private boolean isFull(){
+    public boolean isFull(){
         return numberOfEntries == bag.length;
     }
 
@@ -195,6 +195,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
     /*
     *    @return A new bag of the union of the bag
      */
+
 
     @Override
     public BagInterface<T> union(BagInterface<T> aBag) {

@@ -2,7 +2,7 @@ public class ArrayBagTest{
 
     public static void main(String[] args){
         //tests
-        BagInterface<String> aBag = new ResizableArrayBag<String>();
+        ResizableArrayBag<String> aBag = new ResizableArrayBag<String>();
 
         testIsFull(aBag, false);
 
@@ -36,7 +36,7 @@ public class ArrayBagTest{
     }
 
 
-    private static void testIsFull(BagInterface<String> aBag, boolean correctResult) {
+    private static void testIsFull(ResizableArrayBag<String> aBag, boolean correctResult) {
         System.out.println("\nTesting the method isFull with");
         if(correctResult)
             System.out.println("a full bag;");
