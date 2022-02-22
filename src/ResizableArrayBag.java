@@ -30,6 +30,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
             T[] tempBag = (T[])new Object[desiredCapacity];
             bag = tempBag;
             numberOfEntries = 0;
+            integrityOK = true;
         } else {
             throw new IllegalStateException("Attempted to create bag whose capacity exceeds allowed maximum");
         }
