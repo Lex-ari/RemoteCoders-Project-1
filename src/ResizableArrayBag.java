@@ -215,9 +215,16 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
 
     @Override
     public BagInterface<T> intersection(BagInterface<T> aBag) {
-
-
-        return null; // STUB
+        checkIntegrity(); // Idk if this is needed - Iker
+        @SuppressWarnings("unchecked")
+        ResizableArrayBag<T> intersectionBag = new ResizableArrayBag(DEFAULT_CAPACITY);
+        for (T item : aBag.toArray()) {
+            if(this.contains(item)){
+                intersectionBag.add(item);
+            }
+        }
+        intersectionBag.checkIntegrity(); // Idk if this is needed - Iker
+        return intersectionBag;
     }
 
 
