@@ -1,4 +1,4 @@
-import javax.swing.text.DefaultStyledDocument.ElementSpec;
+aimport javax.swing.text.DefaultStyledDocument.ElementSpec;
 
 public class LinkedBagTest{
     public static void main(String[] args){

@@ -181,11 +181,16 @@ public class LinkedBag<T> implements BagInterface<T>{
 
     @Override
     public BagInterface<T> intersection(BagInterface<T> aBag) {
+        T[] array1 = this.toArray();
+        T[] array2 = aBag.toArray(); 
         @SuppressWarnings("unchecked")
         LinkedBag<T> intersectionBag = new LinkedBag();
-        for (T item : aBag.toArray()) {
-            if(this.contains(item)){
-                intersectionBag.add(item);
+        for(int i = 0; i < array1.length; i++){
+            for(int j = 0; j < array2.length; j++){
+                if(array1[i].equals(array2[j])){
+                    intersectionBag.add(array1[i]);
+                    array1[i] = null;
+                }
             }
         }
         return intersectionBag;
