@@ -9,14 +9,13 @@ CS2400
 
 public class ResizableArrayBag<T> implements BagInterface<T>{
 
-    private  T[] bag; //@TODO: Not sure if this should be final or not. If final, doubleCapacity() breaks. - Alex
+    private T[] bag; // Not final since array changes upon resize.
     private static final int DEFAULT_CAPACITY = 25;
     private static final int MAX_CAPACITY = 10000;
     private int numberOfEntries;
     private boolean integrityOK = false; // Defaulted to false until successful initialization.
 
-    public ResizableArrayBag(){
-        //default constructor
+    public ResizableArrayBag(){ //default constructor
         @SuppressWarnings("unchecked")
         T[] tempBag = (T[])new Object[DEFAULT_CAPACITY]; // assuming DEFAULT_CAPACITY is <= MAX_CAPACITY.
         bag = tempBag;
@@ -193,10 +192,6 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
         }
         return result;
     }
-    /*
-    *    @return A new bag of the union of the bag
-     */
-
 
     @Override
     public BagInterface<T> union(BagInterface<T> aBag) {
@@ -208,16 +203,12 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
             everything.add(item);
         }
         everything.checkIntegrity();
-
-
-
-        // STUB
         return everything;
     }
 
     @Override
     public BagInterface<T> intersection(BagInterface<T> aBag) {
-        checkIntegrity(); // Idk if this is needed - Iker
+        checkIntegrity();
         @SuppressWarnings("unchecked")
         ResizableArrayBag<T> intersectionBag = new ResizableArrayBag(DEFAULT_CAPACITY);
         for (T item : aBag.toArray()) {
@@ -225,29 +216,25 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
                 intersectionBag.add(item);
             }
         }
-        intersectionBag.checkIntegrity(); // Idk if this is needed - Iker
+        intersectionBag.checkIntegrity();
         return intersectionBag;
     }
 
 
     /**
-     *
-     * @param aBag  An Existing Bag
-     * @return A new bag of the difference of the bag receiving the call to the method and the bag that is the method's argument.
+     * Creates a copy of the bag the method is called upon, and loops through all elements if the parameter bag and calls remove(anEntry) on each element.
      */
-
     @Override
     public BagInterface<T> difference(BagInterface<T> aBag) {
-        checkIntegrity(); // Idk if this is needed - Alex
+        checkIntegrity();
         @SuppressWarnings("unchecked")
         ResizableArrayBag<T> leftOverBag = new ResizableArrayBag(this);
         T[] differenceBag = aBag.toArray();
         for (T item : differenceBag) {
             leftOverBag.remove(item);
         }
-        leftOverBag.checkIntegrity(); // Idk if this is needed - Alex
+        leftOverBag.checkIntegrity();
         return leftOverBag;
-
     }
 
 }

@@ -170,11 +170,7 @@ public class LinkedBag<T> implements BagInterface<T>{
         for (T item : unionBag) {
             everything.add(item);
         }
-
-        // STUB
         return everything;
-
-
     }
 
 
@@ -196,10 +192,13 @@ public class LinkedBag<T> implements BagInterface<T>{
         return intersectionBag;
     }
 
+    /**
+     * Creates a copy of the bag the method is called upon, and loops through all elements if the parameter bag and calls remove(anEntry) on each element.
+     */
     @Override
     public BagInterface<T> difference(BagInterface<T> aBag) {
         @SuppressWarnings("unchecked")
-        LinkedBag<T> leftOverBag = new LinkedBag(this); // Copy Constructor NEEDED!
+        LinkedBag<T> leftOverBag = new LinkedBag(this);
         T[] differenceBag = aBag.toArray();
         for (T item : differenceBag) {
             leftOverBag.remove(item);
