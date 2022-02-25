@@ -12,7 +12,7 @@ public class LinkedBagTest{
         System.out.println("Linked bag test cases were successful? = " + result.wasSuccessful());
 
         System.out.println("Creating an empty bag");
-        BagInterface<String> aBag = new LinkedBag<>();
+        BagInterface<String> aBag = new ResizableArrayBag<>();
         displayBag(aBag);
         testIsEmpty(aBag, true);
         String[] testStrings1 = {"", "B"};
