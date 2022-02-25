@@ -1,7 +1,16 @@
-aimport javax.swing.text.DefaultStyledDocument.ElementSpec;
+//aimport javax.swing.text.DefaultStyledDocument.ElementSpec; I don't know who put this here or what it does - Alex
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 public class LinkedBagTest{
     public static void main(String[] args){
+        Result result = JUnitCore.runClasses(JUnitTest1.class);
+        for (Failure failure : result.getFailures()){
+            System.out.println(failure.toString());
+        }
+        System.out.println("Linked bag test cases were successful? = " + result.wasSuccessful());
+
         System.out.println("Creating an empty bag");
         BagInterface<String> aBag = new LinkedBag<>();
         displayBag(aBag);
