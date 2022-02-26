@@ -217,6 +217,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
                 if(array1[i] != null && array2[j] != null && array1[i].equals(array2[j])){
                     intersectionBag.add(array1[i]);
                     array1[i] = null;
+                    array2[j] = null;
                 }
             }
         }
