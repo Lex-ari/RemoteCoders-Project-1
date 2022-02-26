@@ -7,7 +7,13 @@ public class JUnitTest1 {
 
     private String correctSimilarity; //This string is modified for different tests
     private String implementationResult;
+    private static char[] bag1TestingArray;
+    private String[] bag2TestingArray;
 
+    /**
+     * Runs before each test.
+     * @throws Exception
+     */
     @Before
     public static void setUp() throws Exception{
 
@@ -18,6 +24,15 @@ public class JUnitTest1 {
 
     }
 
+    @Test
+    public void unionTest(){
+
+    }
+
+    /**
+     * Runs after each test
+     * @throws Exception
+     */
     @After
     public static void tearDown() throws Exception{
 
