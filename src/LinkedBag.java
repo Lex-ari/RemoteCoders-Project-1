@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 /**
 Remote Coders
@@ -61,6 +62,7 @@ public class LinkedBag<T> implements BagInterface<T>{
 
         if(nodeN != null){
             nodeN.setData(firstNode.getData());
+            firstNode = firstNode.getNextNode();
 
             numberOfEntries--;
 

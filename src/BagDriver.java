@@ -1,8 +1,8 @@
 import java.util.Arrays;
 
 public class BagDriver{
-    static BagInterface bag1 = new ResizableArrayBag();
-    static BagInterface bag2 = new LinkedBag();
+    static BagInterface bag1 = new LinkedBag();
+    static BagInterface bag2 = new ResizableArrayBag();
     public static void main(String[] args){
         reset();
         System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
