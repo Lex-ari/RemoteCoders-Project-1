@@ -3,7 +3,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class JUnitTest1 {
+public class JUnitTestSuite {
 
     private String correctSimilarity; //This string is modified for different tests
     private String implementationResult;

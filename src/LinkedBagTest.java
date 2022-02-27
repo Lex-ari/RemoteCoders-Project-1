@@ -5,7 +5,7 @@ import org.junit.runner.notification.Failure;
 
 public class LinkedBagTest{
     public static void main(String[] args){
-        Result result = JUnitCore.runClasses(JUnitTest1.class);
+        Result result = JUnitCore.runClasses(JUnitTestSuite.class);
         for (Failure failure : result.getFailures()){
             System.out.println(failure.toString());
         }
