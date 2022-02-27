@@ -5,7 +5,6 @@ Professor Qichao Dong
 CS2400
 */
 
-/**These are taken off from the slides lol */
 public interface BagInterface<T> {
 
     /**
