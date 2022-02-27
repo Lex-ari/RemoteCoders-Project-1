@@ -1,89 +1,98 @@
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
+import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
+
 public class ArrayBagTest{
 
-    public static void main(String[] args){
-        Result result = JUnitCore.runClasses(JUnitTestSuite.class);
-        for (Failure failure : result.getFailures()){
-            System.out.println(failure.toString());
-        }
-        System.out.println("Linked bag test cases were successful? = " + result.wasSuccessful());
+    BagInterface aBag = new ResizableArrayBag();
+    BagInterface bBag = new ResizableArrayBag();
 
-        //tests
-        ResizableArrayBag<String> aBag = new ResizableArrayBag<String>();
-
-        testIsFull(aBag, false);
-
-        String[] contentsOfBag1 = {"A", "A", "B", "A", "C", "A"};
-        testAdd(aBag, contentsOfBag1);
-        testIsFull(aBag, false);
-
-        aBag = new ResizableArrayBag<String>(7);
-        System.out.println("\nA new empty bag;");
-
-        testIsFull(aBag, false);
-
-        String[] contentsOfBag2 = {"A", "B", "A", "C", "B", "C", "D"};
-        testAdd(aBag, contentsOfBag2);
-        testIsFull(aBag, true);
-
-
-
-
-
+    /**
+     * Runs before each test. Sets aBag and bBag to default values.
+     * @throws Exception
+     */
+    @BeforeEach
+    public void setUp() throws Exception {
+        aBag.clear();
+        bBag.clear();
+        addArrayContents(aBag, new Object[]{'a', 'a', 'b', 'b', 'b', 'c', 'd', 'e'});
+        addArrayContents(bBag, new Object[]{'a', 'b', 'b', 'e', 'e'});
     }
-    private static void testAdd(BagInterface<String> aBag, String[] content){
 
-        System.out.println("adding to the bag");
-        for(int index = 0; index < content.length; index++){
-            aBag.add(content[index]);
-            System.out.println(content[index] + "");
-            System.out.println();
-            displayBag(aBag);
+    /**
+     * Adds each element of an array into a given bag.
+     * @param bagEntry a BagInterface for an array of objects to be added to.
+     * @param arrayEntry an array of Objects in which each element is added to bagEntry
+     */
+    @Ignore
+    private static void addArrayContents(BagInterface bagEntry, Object[] arrayEntry){
+        for (Object element : arrayEntry){
+            bagEntry.add(element);
         }
     }
 
-
-    private static void testIsFull(ResizableArrayBag<String> aBag, boolean correctResult) {
-        System.out.println("\nTesting the method isFull with");
-        if(correctResult)
-            System.out.println("a full bag;");
-        else
-            System.out.println("a bag is not full");
-
-        System.out.println("isFUll finds the bag");
-        if(correctResult && aBag.isFull())
-            System.out.println("full: ok");
-        else if(correctResult)
-            System.out.println("not full, but it is full: ERROR");
-        else if(aBag.isFull())
-            System.out.println("full, but it is not full: ERROR");
-        else
-            System.out.println("not full: Ok");
+    /**
+     * Tests to see if all initialization elements have been properly added to the bags. This tests teh add() method of the bags.
+     */
+    @Test
+    public void testInitialization(){
+        assertEquals(aBag, new Object[]{'a', 'a', 'b', 'b', 'b', 'c', 'd', 'e'});
+        assertEquals(bBag, new Object[]{'a', 'b', 'b', 'e', 'e'});
     }
 
-
-
-
-
-
-
-
-
-
-    private static void displayBag(BagInterface<String> aBag) {
-        System.out.println("The bag contains the following strings:");
-        Object[] bagArray = aBag.toArray();
-        for(int index = 0; index < bagArray.length; index++){
-            System.out.println(bagArray[index] + "");
-
-        }
-        System.out.println();
+    /**
+     * Tests to see if clear() is functioning properly
+     */
+    @Test
+    public void testClear(){
+        aBag.clear();
+        assertEquals(Arrays.toString(aBag.toArray()), "[]");
     }
 
-    public <T> void union(T[] contentsOfBag1, T[] contentsOfBag2){
+    /**
+     * Tests to see if isEmpty() is functioning properly
+     */
+    @Test
+    public void testIsEmpty(){
+        aBag.clear();
+        assertEquals(aBag.isEmpty(), true);
+        assertEquals(bBag.isEmpty(), false);
+    }
 
+    /**
+     * Tests to see if getFrequencyOf() is working properly
+     */
+    @Test
+    public void testFrequency(){
+        assertEquals(aBag.getFrequencyOf('b'), 3);
+        assertEquals(bBag.getFrequencyOf('j'), 0);
+    }
+
+    /**
+     * Tests to see if contains() is working properly
+     */
+    @Test
+    public void testContains(){
+        assertEquals(aBag.contains('b'), true);
+        assertEquals(bBag.contains('k'), false);
+    }
+
+    /**
+     * Tests to see if remove() is working properly
+     */
+    @Test
+    public void testRemove(){
+        bBag.remove('a');
+        //Assertion, bBag is initialized and that testContains() is successful.
+        assertEquals(bBag.contains('a'), false);
+        aBag.remove('b');
+        assertEquals(aBag.contains('b'), true);
     }
 }
