@@ -15,8 +15,8 @@ import static org.junit.Assert.assertEquals;
 
 public class LinkedBagTest{
 
-    BagInterface aBag = new ResizableArrayBag<>();
-    BagInterface bBag = new ResizableArrayBag<>();
+    BagInterface aBag = new LinkedBag();
+    BagInterface bBag = new LinkedBag();
 
     /**
      * Runs before each test. Sets aBag and bBag to default values.
@@ -79,5 +79,4 @@ public class LinkedBagTest{
         aBag.remove('b');
         assertEquals(aBag.contains('b'), true);
     }
-
 }
