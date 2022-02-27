@@ -22,12 +22,12 @@ public class LinkedBagTest{
      * Runs before each test. Sets aBag and bBag to default values.
      * @throws Exception
      */
-    @BeforeEach
+    @Before
     public void setUp() throws Exception {
         aBag.clear();
         bBag.clear();
-        addArrayContents(aBag, new Object[]{'a', 'a', 'b', 'b', 'b', 'c', 'd', 'e'});
-        addArrayContents(bBag, new Object[]{'a', 'b', 'b', 'e', 'e'});
+        addArrayContents(aBag, new Object[]{'e', 'd', 'c', 'b', 'b', 'b', 'a', 'a'});
+        addArrayContents(bBag, new Object[]{'e', 'e', 'b', 'b', 'a'});
     }
 
     /**
@@ -47,8 +47,8 @@ public class LinkedBagTest{
      */
     @Test
     public void testInitialization(){
-        assertEquals(aBag, new Object[]{'a', 'a', 'b', 'b', 'b', 'c', 'd', 'e'});
-        assertEquals(bBag, new Object[]{'a', 'b', 'b', 'e', 'e'});
+        assertEquals(Arrays.toString(new Object[]{'a', 'a', 'b', 'b', 'b', 'c', 'd', 'e'}), Arrays.toString(aBag.toArray()));
+        assertEquals(Arrays.toString(new Object[]{'a', 'b', 'b', 'e', 'e'}),  Arrays.toString(bBag.toArray()));
     }
 
     /**
@@ -57,7 +57,7 @@ public class LinkedBagTest{
     @Test
     public void testClear(){
         aBag.clear();
-        assertEquals(Arrays.toString(aBag.toArray()), "[]");
+        assertEquals("[]", Arrays.toString(aBag.toArray()));
     }
 
     /**
@@ -66,8 +66,8 @@ public class LinkedBagTest{
     @Test
     public void testIsEmpty(){
         aBag.clear();
-        assertEquals(aBag.isEmpty(), true);
-        assertEquals(bBag.isEmpty(), false);
+        assertEquals(true, aBag.isEmpty());
+        assertEquals(false, bBag.isEmpty());
     }
 
     /**
@@ -75,8 +75,8 @@ public class LinkedBagTest{
      */
     @Test
     public void testFrequency(){
-        assertEquals(aBag.getFrequencyOf('b'), 3);
-        assertEquals(bBag.getFrequencyOf('j'), 0);
+        assertEquals(3, aBag.getFrequencyOf('b'));
+        assertEquals(0, bBag.getFrequencyOf('j'));
     }
 
     /**
@@ -84,8 +84,8 @@ public class LinkedBagTest{
      */
     @Test
     public void testContains(){
-        assertEquals(aBag.contains('b'), true);
-        assertEquals(bBag.contains('k'), false);
+        assertEquals(true, aBag.contains('b'));
+        assertEquals(false, bBag.contains('k'));
     }
 
     /**
@@ -95,8 +95,8 @@ public class LinkedBagTest{
     public void testRemove(){
         bBag.remove('a');
         //Assertion, bBag is initialized and that testContains() is successful.
-        assertEquals(bBag.contains('a'), false);
+        assertEquals(false, bBag.contains('a'));
         aBag.remove('b');
-        assertEquals(aBag.contains('b'), true);
+        assertEquals(true, aBag.contains('b'));
     }
 }
