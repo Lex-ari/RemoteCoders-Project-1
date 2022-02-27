@@ -1,47 +1,23 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 public class JUnitTestSuite {
 
-    private String correctSimilarity; //This string is modified for different tests
-    private String implementationResult;
-    private static char[] bag1TestingArray;
-    private String[] bag2TestingArray;
 
-    /**
-     * Runs before each test.
-     * @throws Exception
-     */
-    @Before
-    public static void setUp() throws Exception{
-
+    public void testResizableArrayBag(){
+        Result result = JUnitCore.runClasses(ResizableArrayBag.class);
+        for (Failure failure : result.getFailures()){
+            System.out.println(failure.toString());
+        }
+        System.out.println("Resizable Array Bag test cases were successful? = " + result.wasSuccessful());
     }
 
-    @Test
-    public void testAdd(){
-
+    public void testLinkedBag(){
+        Result result = JUnitCore.runClasses(LinkedBagTest.class);
+        for (Failure failure : result.getFailures()){
+            System.out.println(failure.toString());
+        }
+        System.out.println("Linked bag test cases were successful? = " + result.wasSuccessful());
     }
-
-    @Test
-    public void unionTest(){
-
-    }
-
-    /**
-     * Runs after each test
-     * @throws Exception
-     */
-    @After
-    public static void tearDown() throws Exception{
-
-    }
-
-    @Test
-    public void testPrintMessage(){
-        assertEquals(correctSimilarity, implementationResult);
-    }
-
-
 }
