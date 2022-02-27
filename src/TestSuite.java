@@ -4,7 +4,6 @@ import org.junit.runner.notification.Failure;
 
 public class TestSuite {
 
-
     public static void testResizableArrayBag(){
         Result result = JUnitCore.runClasses(ArrayBagTest.class);
         for (Failure failure : result.getFailures()){

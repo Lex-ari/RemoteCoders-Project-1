@@ -99,4 +99,49 @@ public class LinkedBagTest{
         aBag.remove('b');
         assertEquals(true, aBag.contains('b'));
     }
+
+    @Test
+    public void testUnion(){
+        assertEquals(true, checkIfSame(aBag.union(bBag), new Object[]{'a', 'a', 'a', 'b', 'b', 'b', 'b', 'b', 'c', 'd', 'e', 'e', 'e'}));
+        assertEquals(true, checkIfSame(bBag.union(aBag), new Object[]{'a', 'a', 'a', 'b', 'b', 'b', 'b', 'b', 'c', 'd', 'e', 'e', 'e'}));
+    }
+
+    @Test
+    public void testIntersection(){
+        assertEquals(true, checkIfSame(aBag.intersection(bBag), new Object[]{'a', 'b', 'b', 'e'}));
+        assertEquals(true, checkIfSame(bBag.intersection(aBag), new Object[]{'a', 'b', 'b', 'e'}));
+    }
+
+    @Test
+    public void testDifference(){
+        assertEquals(true, checkIfSame(aBag.difference(bBag), new Object[]{'a', 'b', 'c', 'd'}));
+        assertEquals(true, checkIfSame(bBag.difference(aBag), new Object[]{'e'}));
+    }
+
+
+    @Ignore
+    private boolean checkIfSame(BagInterface aBag, Object[] anArray){
+        boolean isSame = true;
+        Object[] bagArray = aBag.toArray();
+        for (int i = 0; i < bagArray.length; i++){
+            for (int j = 0; j < anArray.length; j++){
+                if (bagArray[i] != null && anArray[j] != null && bagArray[i].equals(anArray[j])){
+                    bagArray[i] = null;
+                    anArray[j] = null;
+                }
+            }
+        }
+        for (int i = 0; i < bagArray.length; i++){
+            if(bagArray[i] != null){
+                isSame = false;
+            }
+        }
+        for (int j = 0; j < anArray.length; j++){
+            if(anArray[j] != null){
+                isSame = false;
+            }
+        }
+        //At the end of the loops, both arrays should be null on all values.
+        return isSame;
+    }
 }
