@@ -1,99 +1,83 @@
 //aimport javax.swing.text.DefaultStyledDocument.ElementSpec; I don't know who put this here or what it does - Alex
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
+import org.junit.Assert.*;
+
+import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
 
 public class LinkedBagTest{
-    public static void main(String[] args){
-        Result result = JUnitCore.runClasses(JUnitTestSuite.class);
-        for (Failure failure : result.getFailures()){
-            System.out.println(failure.toString());
-        }
-        System.out.println("Linked bag test cases were successful? = " + result.wasSuccessful());
 
-        System.out.println("Creating an empty bag");
-        BagInterface<String> aBag = new ResizableArrayBag<>();
-        displayBag(aBag);
-        testIsEmpty(aBag, true);
-        String[] testStrings1 = {"", "B"};
-        testFrequency(aBag, testStrings1);
-        testContains(aBag, testStrings1);
-        testRemove(aBag, testStrings1);
+    BagInterface aBag = new ResizableArrayBag<>();
+    BagInterface bBag = new ResizableArrayBag<>();
 
-        String[] contentsOfBag = {"A", "D", "B", "A", "C", "A", "D"};
-        testAdd(aBag, contentsOfBag);
-
-        testIsEmpty(aBag, false);
-        String[] testStrings2 = {"A", "B", "C", "D", "Z"};
-        testFrequency(aBag, testStrings2);
-        testContains(aBag, testStrings2);
-
-        String[] testStrings3 = {"", "B", "A", "C", "Z"};
-        testRemove(aBag, testStrings3);
-
-        System.out.println("\nClearing the bag");
+    /**
+     * Runs before each test. Sets aBag and bBag to default values.
+     * @throws Exception
+     */
+    @BeforeEach
+    public void setUp() throws Exception {
         aBag.clear();
-        testIsEmpty(aBag, true);
-        displayBag(aBag);
+        bBag.clear();
+        addArrayContents(aBag, new Object[]{'a', 'a', 'b', 'b', 'b', 'c', 'd', 'e'});
+        addArrayContents(bBag, new Object[]{'a', 'b', 'b', 'e', 'e'});
     }
-    private static void testIsEmpty(BagInterface<String> aBag, boolean result){
-        System.out.println("Testing isEmpty method...");
-        boolean methodCheck = aBag.isEmpty();
-        if(result){
-            System.out.println("Bag is empty");
-        }
-        else{
-            System.out.println("Bag is not empty");
-        }
-        if(methodCheck && !result){
-            System.out.println("isEmpty returns true but bag is not empty: ERROR");
-        }
-        else if(!methodCheck && result){
-            System.out.println("isEmpty returns false but bag is empty: ERROR");
-        }
-        else if(methodCheck && result){
-            System.out.println("isEmpty returns true: OK");
-        }
-        else{
-            System.out.println("isEmpty returns false: OK");
+
+    @Ignore
+    private static void addArrayContents(BagInterface bagEntry, Object[] arrayEntry){
+        for (Object element : arrayEntry){
+            bagEntry.add(element);
         }
     }
-    private static void testFrequency(BagInterface<String> aBag, String[] content){
-        System.out.println("Testing getFrequencyOf method: ");
-        int result = aBag.getFrequencyOf("B");
-        System.out.println("Frequency of B: " + result);
+
+    /**
+     * Tests to see if all initialization elements have been properly added to the bags. This tests teh add() method of the bags.
+     */
+    @Test
+    public void testInitialization(){
+        assertEquals(aBag, new Object[]{'a', 'a', 'b', 'b', 'b', 'c', 'd', 'e'});
+        assertEquals(bBag, new Object[]{'a', 'b', 'b', 'e', 'e'});
     }
-    private static void testContains(BagInterface<String> aBag, String[] content){
-        System.out.println("Testing contains method: ");
-        boolean result = aBag.contains("B");
-        System.out.println("Does the bag contain B: " + result);
+
+    @Test
+    public void testClear(){
+        aBag.clear();
+        assertEquals(Arrays.toString(aBag.toArray()), "[]");
     }
-    private static void testRemove(BagInterface<String> aBag, String[] content){
-        System.out.println("removing from the bag: ");
-        for(int index = 0; index < content.length; index++){
-            System.out.print(content[index] + " ");
-            aBag.remove(content[index]);
-        }
-        System.out.println();
-        displayBag(aBag);
-        
+
+    @Test
+    public void testIsEmpty(){
+        aBag.clear();
+        assertEquals(aBag.isEmpty(), true);
+        assertEquals(bBag.isEmpty(), false);
     }
-    private static void testAdd(BagInterface<String> aBag, String[] content){
-        System.out.println("adding to the bag: ");
-        for(int index = 0; index < content.length; index++){
-            aBag.add(content[index]);
-            System.out.print(content[index] + " ");
-        }
-        System.out.println();
-        displayBag(aBag);
+
+    @Test
+    public void testFrequency(){
+        assertEquals(aBag.getFrequencyOf('b'), 3);
+        assertEquals(bBag.getFrequencyOf('j'), 0);
     }
-    private static void displayBag(BagInterface<String> aBag){
-        System.out.println("The bag contains the following string(s):");
-        Object[] bagArray = aBag.toArray();
-        for(int index = 0; index < bagArray.length; index++){
-            System.out.print(bagArray[index] + " ");
-        }
-        System.out.println();
-       }
-    
+
+    @Test
+    public void testContains(){
+        assertEquals(aBag.contains('b'), true);
+        assertEquals(bBag.contains('k'), false);
+    }
+
+    @Test
+    public void testRemove(){
+        bBag.remove('a');
+        //Assertion, bBag is initialized and that testContains() is successful.
+        assertEquals(bBag.contains('a'), false);
+        aBag.remove('b');
+        assertEquals(aBag.contains('b'), true);
+    }
+
 }
