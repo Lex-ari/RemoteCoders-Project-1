@@ -2,10 +2,10 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-public class JUnitTestSuite {
+public class TestSuite {
 
 
-    public void testResizableArrayBag(){
+    public static void testResizableArrayBag(){
         Result result = JUnitCore.runClasses(ResizableArrayBag.class);
         for (Failure failure : result.getFailures()){
             System.out.println(failure.toString());
@@ -13,7 +13,7 @@ public class JUnitTestSuite {
         System.out.println("Resizable Array Bag test cases were successful? = " + result.wasSuccessful());
     }
 
-    public void testLinkedBag(){
+    public static void testLinkedBag(){
         Result result = JUnitCore.runClasses(LinkedBagTest.class);
         for (Failure failure : result.getFailures()){
             System.out.println(failure.toString());
