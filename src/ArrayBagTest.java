@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,8 +45,10 @@ public class ArrayBagTest{
      */
     @Test
     public void testInitialization(){
+        System.out.println("\nTesting initialization");
         assertEquals(Arrays.toString(new Object[]{'a', 'a', 'b', 'b', 'b', 'c', 'd', 'e'}), Arrays.toString(aBag.toArray()));
         assertEquals(Arrays.toString(new Object[]{'a', 'b', 'b', 'e', 'e'}),  Arrays.toString(bBag.toArray()));
+        System.out.println("Initialization Successful");
     }
 
     /**
@@ -53,8 +56,10 @@ public class ArrayBagTest{
      */
     @Test
     public void testClear(){
+        System.out.println("\nTesting clear");
         aBag.clear();
         assertEquals("[]", Arrays.toString(aBag.toArray()));
+        System.out.println("Clear successful");
     }
 
     /**
@@ -62,9 +67,11 @@ public class ArrayBagTest{
      */
     @Test
     public void testIsEmpty(){
+        System.out.println("\nTesting isEmpty");
         aBag.clear();
         assertEquals(true, aBag.isEmpty());
         assertEquals(false, bBag.isEmpty());
+        System.out.println("isEmpty successful");
     }
 
     /**
@@ -72,8 +79,10 @@ public class ArrayBagTest{
      */
     @Test
     public void testFrequency(){
+        System.out.println("\nTesting frequency");
         assertEquals(3, aBag.getFrequencyOf('b'));
         assertEquals(0, bBag.getFrequencyOf('j'));
+        System.out.println("frequency successful");
     }
 
     /**
@@ -81,8 +90,10 @@ public class ArrayBagTest{
      */
     @Test
     public void testContains(){
+        System.out.println("\nTesting contains");
         assertEquals(true, aBag.contains('b'));
         assertEquals(false, bBag.contains('k'));
+        System.out.println("contains successful");
     }
 
     /**
@@ -90,29 +101,68 @@ public class ArrayBagTest{
      */
     @Test
     public void testRemove(){
+        System.out.println("\nTesting remove");
         bBag.remove('a');
         //Assertion, bBag is initialized and that testContains() is successful.
         assertEquals(false, bBag.contains('a'));
         aBag.remove('b');
         assertEquals(true, aBag.contains('b'));
+        System.out.println("remove successful");
     }
 
+    /**
+     * Test to see if union() is working properly
+     */
     @Test
     public void testUnion(){
-        assertEquals(true, checkIfSame(aBag.union(bBag), new Object[]{'a', 'a', 'a', 'b', 'b', 'b', 'b', 'b', 'c', 'd', 'e', 'e', 'e'}));
-        assertEquals(true, checkIfSame(bBag.union(aBag), new Object[]{'a', 'a', 'a', 'b', 'b', 'b', 'b', 'b', 'c', 'd', 'e', 'e', 'e'}));
+        System.out.println("\nTesting union");
+        BagInterface atoBResult = aBag.union(bBag);
+        BagInterface btoAResult = bBag.union(aBag);
+        Object[] expectedContents = new Object[]{'a', 'a', 'a', 'b', 'b', 'b', 'b', 'b', 'c', 'd', 'e', 'e', 'e'};
+        if (!checkIfSame(atoBResult, expectedContents)){
+            Assert.fail("expected:<" + Arrays.toString(expectedContents) + "> but was:<" + Arrays.toString(atoBResult.toArray()) + "> (unsorted)");
+        }
+        if (!checkIfSame(btoAResult, expectedContents)){
+            Assert.fail("expected:<" + Arrays.toString(expectedContents) + "> but was:<" + Arrays.toString(btoAResult.toArray()) + "> (unsorted)");
+        }
+        System.out.println("union successful");
     }
 
+    /**
+     * Test to see if intersection() is working properly
+     */
     @Test
     public void testIntersection(){
-        assertEquals(true, checkIfSame(aBag.intersection(bBag), new Object[]{'a', 'b', 'b', 'e'}));
-        assertEquals(true, checkIfSame(bBag.intersection(aBag), new Object[]{'a', 'b', 'b', 'e'}));
+        System.out.println("\nTesting intersection");
+        BagInterface atoBResult = aBag.intersection(bBag);
+        BagInterface btoAResult = bBag.intersection(aBag);
+        Object[] expectedContents = new Object[]{'a', 'b', 'b', 'e'};
+        if (!checkIfSame(atoBResult, expectedContents)){
+            Assert.fail("expected:<" + Arrays.toString(expectedContents) + "> but was:<" + Arrays.toString(atoBResult.toArray()) + "> (unsorted)");
+        }
+        if (!checkIfSame(btoAResult, expectedContents)){
+            Assert.fail("expected:<" + Arrays.toString(expectedContents) + "> but was:<" + Arrays.toString(btoAResult.toArray()) + "> (unsorted)");
+        }
+        System.out.println("intersection successful");
     }
 
+    /**
+     * Test to see if difference() is working properly
+     */
     @Test
     public void testDifference(){
-        assertEquals(true, checkIfSame(aBag.difference(bBag), new Object[]{'a', 'b', 'c', 'd'}));
-        assertEquals(true, checkIfSame(bBag.difference(aBag), new Object[]{'e'}));
+        System.out.println("\nTesting difference");
+        BagInterface atoBResult = aBag.difference(bBag);
+        BagInterface btoAResult = bBag.difference(aBag);
+        Object[] expectedContentsAtoB = new Object[]{'a', 'b', 'c', 'd'};
+        Object[] expectedContentsBtoA = new Object[]{'e'};
+        if (!checkIfSame(atoBResult, expectedContentsAtoB)){
+            Assert.fail("expected:<" + Arrays.toString(expectedContentsAtoB) + "> but was:<" + Arrays.toString(atoBResult.toArray()) + "> (unsorted)");
+        }
+        if (!checkIfSame(btoAResult, expectedContentsBtoA)){
+            Assert.fail("expected:<" + Arrays.toString(expectedContentsBtoA) + "> but was:<" + Arrays.toString(btoAResult.toArray()) + "> (unsorted)");
+        }
+        System.out.println("difference successful");
     }
 
 
@@ -120,11 +170,12 @@ public class ArrayBagTest{
     private boolean checkIfSame(BagInterface aBag, Object[] anArray){
         boolean isSame = true;
         Object[] bagArray = aBag.toArray();
+        Object[] copiedAnArray = Arrays.copyOf(anArray,anArray.length);
         for (int i = 0; i < bagArray.length; i++){
-            for (int j = 0; j < anArray.length; j++){
-                if (bagArray[i] != null && anArray[j] != null && bagArray[i].equals(anArray[j])){
+            for (int j = 0; j < copiedAnArray.length; j++){
+                if (bagArray[i] != null && copiedAnArray[j] != null && bagArray[i].equals(copiedAnArray[j])){
                     bagArray[i] = null;
-                    anArray[j] = null;
+                    copiedAnArray[j] = null;
                 }
             }
         }
@@ -134,7 +185,7 @@ public class ArrayBagTest{
             }
         }
         for (int j = 0; j < anArray.length; j++){
-            if(anArray[j] != null){
+            if(copiedAnArray[j] != null){
                 isSame = false;
             }
         }
