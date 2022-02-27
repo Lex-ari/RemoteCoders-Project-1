@@ -30,6 +30,11 @@ public class LinkedBagTest{
         addArrayContents(bBag, new Object[]{'a', 'b', 'b', 'e', 'e'});
     }
 
+    /**
+     * Adds each element of an array into a given bag.
+     * @param bagEntry a BagInterface for an array of objects to be added to.
+     * @param arrayEntry an array of Objects in which each element is added to bagEntry
+     */
     @Ignore
     private static void addArrayContents(BagInterface bagEntry, Object[] arrayEntry){
         for (Object element : arrayEntry){
@@ -46,12 +51,18 @@ public class LinkedBagTest{
         assertEquals(bBag, new Object[]{'a', 'b', 'b', 'e', 'e'});
     }
 
+    /**
+     * Tests to see if clear() is functioning properly
+     */
     @Test
     public void testClear(){
         aBag.clear();
         assertEquals(Arrays.toString(aBag.toArray()), "[]");
     }
 
+    /**
+     * Tests to see if isEmpty() is functioning properly
+     */
     @Test
     public void testIsEmpty(){
         aBag.clear();
@@ -59,18 +70,27 @@ public class LinkedBagTest{
         assertEquals(bBag.isEmpty(), false);
     }
 
+    /**
+     * Tests to see if getFrequencyOf() is working properly
+     */
     @Test
     public void testFrequency(){
         assertEquals(aBag.getFrequencyOf('b'), 3);
         assertEquals(bBag.getFrequencyOf('j'), 0);
     }
 
+    /**
+     * Tests to see if contains() is working properly
+     */
     @Test
     public void testContains(){
         assertEquals(aBag.contains('b'), true);
         assertEquals(bBag.contains('k'), false);
     }
 
+    /**
+     * Tests to see if remove() is working properly
+     */
     @Test
     public void testRemove(){
         bBag.remove('a');
