@@ -2,7 +2,7 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-public class TestSuite {
+public class TestRunner {
 
     /**
      * JUnit test calling upon methods in ArrayBagTest.class. Prints out failures. If Successful, prints out successful = true message.
