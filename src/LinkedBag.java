@@ -12,11 +12,18 @@ public class LinkedBag<T> implements BagInterface<T>{
     private Node firstNode;
     private int numberOfEntries;
 
+    /**
+     * Default constructor with default node null.
+     */
     public LinkedBag(){
         firstNode = null;
         numberOfEntries = 0;
     }
 
+    /**
+     * Copy constructor
+     * @param bagToCopy a Baginterface for its contents to be copied to the constructed linkedBag
+     */
     public LinkedBag(BagInterface<T> bagToCopy){
         for(T thing : bagToCopy.toArray()){
             this.add(thing);
@@ -125,7 +132,12 @@ public class LinkedBag<T> implements BagInterface<T>{
         }
         return result;
     }
-    public Node getReferenceTo(T anEntry){
+
+    /**
+     * @param anEntry to find in the linked bag
+     * @return Node of the searched-for entry. Returns null if not found.
+     */
+    private Node getReferenceTo(T anEntry){
         boolean found = false;
         Node currentNode = firstNode;
 
@@ -150,15 +162,34 @@ public class LinkedBag<T> implements BagInterface<T>{
             data = dataPortion;
             next = nextNode;
         }
+
+        /**
+         * @return Returns the data the node has.
+         */
         private T getData(){
             return data;
         }
+
+        /**
+         * Sets data to node
+         * @param newData data to set to node
+         */
         private void setData(T newData){
             data = newData;
         }
+
+        /**
+         * Gets next node
+         * @return the current node points to. Null if last node.
+         */
         private Node getNextNode(){
             return next;
         }
+
+        /**
+         * Sets the next node of the current node.
+         * @param nextNode node for current node to point to.
+         */
         private void setNextNode(Node nextNode){
             next = nextNode;
         }
@@ -196,7 +227,11 @@ public class LinkedBag<T> implements BagInterface<T>{
     }
 
     /**
-     * Creates a copy of the bag the method is called upon, and loops through all elements if the parameter bag and calls remove(anEntry) on each element.
+     * The difference of two collections is a new collection of the entries that would be left in one collection after removing those that also occur in the second.
+     * Copies the bag the method is called upon, and calls remove(anEntry) on each element of the BagInterface Parameter.
+     *
+     * @param aBag An Existing Bag
+     * @return New bag the difference of the bag receiving the call to the method and the bag that is the method’s one argument.
      */
     @Override
     public BagInterface<T> difference(BagInterface<T> aBag) {

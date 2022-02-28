@@ -165,7 +165,12 @@ public class ArrayBagTest{
         System.out.println("difference successful");
     }
 
-
+    /**
+     * A method to check if a given BagInterface has the same contents as an Array, with no attention to order.
+     * @param aBag bag with contents.
+     * @param anArray an array with contents
+     * @return true if bag and array are the same contents, false otherwise.
+     */
     @Ignore
     private boolean checkIfSame(BagInterface aBag, Object[] anArray){
         boolean isSame = true;

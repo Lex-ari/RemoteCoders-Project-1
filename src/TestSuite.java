@@ -4,6 +4,9 @@ import org.junit.runner.notification.Failure;
 
 public class TestSuite {
 
+    /**
+     * JUnit test calling upon methods in ArrayBagTest.class. Prints out failures. If Successful, prints out successful = true message.
+     */
     public static void testResizableArrayBag(){
         Result result = JUnitCore.runClasses(ArrayBagTest.class);
         for (Failure failure : result.getFailures()){
@@ -12,6 +15,9 @@ public class TestSuite {
         System.out.println("Resizable Array Bag test cases were successful? = " + result.wasSuccessful());
     }
 
+    /**
+     * JUnit test calling upon methods in LinkedBagTest.class. Prints out failures. If Successful, prints out successful = true message.
+     */
     public static void testLinkedBag(){
         Result result = JUnitCore.runClasses(LinkedBagTest.class);
         for (Failure failure : result.getFailures()){

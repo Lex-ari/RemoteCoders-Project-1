@@ -8,7 +8,7 @@ Koki Yamaguchi:
 
 Iker Goni:
 
-Alex Mariano: Made foundation for project and github. 
+Alex Mariano: Made foundation for project and github. Implemented base methods for ResizableArrayBag.java, differnece() method on ResizableArrayBag and Linked Bag, configured test cases from ArrayBagTest and LinkedBagTest into Junit. 
 
 Screencast Video: //TOBECHANGED
 
