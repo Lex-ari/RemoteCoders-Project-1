@@ -5,7 +5,6 @@ Professor Qichao Dong
 CS2400
 */
 
-/**These are taken off from the slides lol */
 public interface BagInterface<T> {
 
     /**
@@ -100,7 +99,7 @@ public interface BagInterface<T> {
      * The difference of two collections is a new collection of the entries that would be left in one collection after removing those that also occur in the second.
      *
      * @param aBag An Existing Bag
-     * @return New bag the difference of the bag receiving the call to the method and the bag that is the method’s one argument. Include sufficient comments to fully specify the method.
+     * @return New bag the difference of the bag receiving the call to the method and the bag that is the method’s one argument.
      */
     public BagInterface<T> difference(BagInterface<T> aBag);
 

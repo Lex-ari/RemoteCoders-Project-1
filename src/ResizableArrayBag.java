@@ -15,6 +15,10 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
     private int numberOfEntries;
     private boolean integrityOK = false; // Defaulted to false until successful initialization.
 
+    /**
+     * Default constructor.
+     * Creates a ResizableArrayBag with DEFAULT_CAPACITY
+     */
     public ResizableArrayBag(){ //default constructor
         @SuppressWarnings("unchecked")
         T[] tempBag = (T[])new Object[DEFAULT_CAPACITY]; // assuming DEFAULT_CAPACITY is <= MAX_CAPACITY.
@@ -23,6 +27,10 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
         integrityOK = true;
     }
 
+    /**
+     * Default constructor where the capacity can be set.
+     * @param desiredCapacity capacity (length) of the bag. Cannot exceed MAX_CAPACITY or otherwise throws exception.
+     */
     public ResizableArrayBag(int desiredCapacity){
         if (desiredCapacity <= MAX_CAPACITY){
             @SuppressWarnings("unchecked")
@@ -36,7 +44,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
     }
 
     /**
-     * This is a copy constructor - Alex
+     * Copy constructor
      * @param bagToCopy, contents from bagToCpy will be "copied" over to the new ResizableArrayBag.
      */
     public ResizableArrayBag(BagInterface<T> bagToCopy){
@@ -54,6 +62,9 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
         integrityOK = true;
     }
 
+    /**
+     * Simple check if the integrity of the bag is OK. Ensures that the bag is properly initialized with proper space.
+     */
     private void checkIntegrity(){
         if (!integrityOK){
             throw new SecurityException("ArrayBag object is corrupt.");
@@ -87,22 +98,25 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
         return true; //returns very successful. Inner methods would throw exception if not.
     }
 
+    /**
+     * Checks to see if given capacity does not exceed set MAX_CAPACITY. Throws an exception if it exceeds.
+     * @param capacity Capacity to check if less than MAX_CAPACITY. If greater, throws an exception.
+     */
     private void checkCapacity(int capacity){ // Very simple check to not go over max capacity
         if (capacity > MAX_CAPACITY){
             throw new IllegalStateException("Attempted to create a bag whose capcaity exceeds allowed maximum of " + MAX_CAPACITY);
         }
     }
 
+    /**
+     * Doubles the capacity of the bag. This creates a new array with double the length, and moves over contents.
+     */
     private void doubleCapacity(){
         int newLength = 2 * bag.length;
         checkCapacity(newLength);
         bag = Arrays.copyOf(bag, newLength);
     }
 
-    /**
-     *
-     * @return Removed entry, or null if unsuccessful.
-     */
     @Override
     public T remove() {
         checkIntegrity();
@@ -110,11 +124,6 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
         return result;
     }
 
-
-    /**
-     * @param anEntry  The entry to be removed.
-     * @return True if removal was successful, false if not
-     */
     @Override
     public boolean remove(T anEntry) {
         checkIntegrity();
@@ -167,6 +176,11 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
         return getIndexOf(anEntry) > -1;
     }
 
+    /**
+     * Searches through the contents of the bag and returns the index of anEntry.
+     * @param anEntry Entry to search for.
+     * @return index of the Entry in the bag. Returns -1 if not found.
+     */
     private int getIndexOf(T anEntry) {
         int where = -1;
         boolean found = false;
@@ -226,7 +240,11 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
 
 
     /**
-     * Creates a copy of the bag the method is called upon, and loops through all elements if the parameter bag and calls remove(anEntry) on each element.
+     * The difference of two collections is a new collection of the entries that would be left in one collection after removing those that also occur in the second.
+     * Copies the bag the method is called upon, and calls remove(anEntry) on each element of the BagInterface Parameter.
+     *
+     * @param aBag An Existing Bag
+     * @return New bag the difference of the bag receiving the call to the method and the bag that is the method’s one argument.
      */
     @Override
     public BagInterface<T> difference(BagInterface<T> aBag) {
