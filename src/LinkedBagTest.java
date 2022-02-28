@@ -1,4 +1,4 @@
-//aimport javax.swing.text.DefaultStyledDocument.ElementSpec; I don't know who put this here or what it does - Alex
+import javax.swing.text.DefaultStyledDocument.ElementSpec;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
