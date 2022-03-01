@@ -14,6 +14,6 @@ Extra Implementations: Junit framework. BagDriver.java runs TestRunner.java, whi
 
 Screencast Video: //TOBECHANGED
 
-Javadoc: index.html //TOBECHANGED
+Javadoc: https://lex-ari.github.io/RemoteCoders-Project-1/BagInterface.html
 
 Professor Qichao Dong for CS2400
