@@ -4,7 +4,7 @@ Koki Yamaguchi, Iker Goni, Alex Mariano
 
 Contributions
 
-Koki Yamaguchi: Made the based methods for ArrayBagTest.java and created the code Union method in the ResizableArrayBag.java and LinkedBag.java. 
+Koki Yamaguchi: Made the based methods for ArrayBagTest.java and BagDriver and created the code Union method in the ResizableArrayBag.java and LinkedBag.java. 
 
 Iker Goni: Programmed base methods for LinkedBag.java and LinkedBagTest.java, programmed intersection() for LinkedBag and ResizableArrayBag
 
