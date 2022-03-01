@@ -207,13 +207,15 @@ public class LinkedBag<T> implements BagInterface<T>{
     }
 
 
-    /* 
+    /**
         Two bags involved, this bag and parameter aBag
         Instantiate LinkedBag intersectionBag 
         Convert both bags into arrays using toArray() in order to traverse them
         Use nested for loop to go through each element of the parameter bag for each element in this bag
         If the elements are not null and equal to each other, add the element to intersectionBag and set the arrayValues to null
         return the intersectionBag
+        @param aBag An Existing Bag
+        @return New bag that contains what this and aBag have.
     */
     @Override
     public BagInterface<T> intersection(BagInterface<T> aBag) {
