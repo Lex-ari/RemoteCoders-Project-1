@@ -12,7 +12,7 @@ Alex Mariano: Made foundation for project and github. Implemented base methods f
 
 Extra Implementations: Junit framework. BagDriver.java runs TestRunner.java, which uses test cases on ArrayBagTest.java and LinkedBagTest.java.
 
-Screencast Video: //TOBECHANGED
+Screencast Video: https://www.youtube.com/watch?v=_8bfbw0Z43M
 
 Javadoc: https://lex-ari.github.io/RemoteCoders-Project-1/BagInterface.html
 
